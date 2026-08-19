@@ -1,9 +1,10 @@
-const express = require("express");
+import express from "express";
+import { protect, authorize } from "../middleware/authMiddleware.js";
+import Vehicle from "../models/Vehicle.js";
+import Driver from "../models/Driver.js";
+import Trip from "../models/Trip.js";
+
 const router = express.Router();
-const { protect, authorize } = require("../middleware/authMiddleware");
-const Vehicle = require("../models/Vehicle");
-const Driver = require("../models/Driver");
-const Trip = require("../models/Trip");
 
 // @desc    Get dashboard metrics & recent activities
 // @route   GET /api/dashboard/stats
@@ -110,4 +111,4 @@ router.get(
   },
 );
 
-module.exports = router;
+export default router;

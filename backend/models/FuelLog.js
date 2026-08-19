@@ -1,26 +1,29 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
-const FuelLogSchema = new mongoose.Schema({
-  vehicleId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Vehicle',
-    required: [true, 'Please specify a vehicle']
+const FuelLogSchema = new mongoose.Schema(
+  {
+    vehicleId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Vehicle",
+      required: [true, "Please specify a vehicle"],
+    },
+    date: {
+      type: Date,
+      required: [true, "Please specify date"],
+      default: Date.now,
+    },
+    liters: {
+      type: Number,
+      required: [true, "Please specify fuel volume in liters"],
+    },
+    cost: {
+      type: Number,
+      required: [true, "Please specify fuel cost"],
+    },
   },
-  date: {
-    type: Date,
-    required: [true, 'Please specify date'],
-    default: Date.now
+  {
+    timestamps: true,
   },
-  liters: {
-    type: Number,
-    required: [true, 'Please specify fuel volume in liters']
-  },
-  cost: {
-    type: Number,
-    required: [true, 'Please specify fuel cost']
-  }
-}, {
-  timestamps: true
-});
+);
 
-module.exports = mongoose.model('FuelLog', FuelLogSchema);
+export default mongoose.model("FuelLog", FuelLogSchema);

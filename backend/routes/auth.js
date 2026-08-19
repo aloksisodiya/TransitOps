@@ -1,10 +1,11 @@
-const express = require("express");
+import express from "express";
+import jwt from "jsonwebtoken";
+import crypto from "crypto";
+import { z } from "zod";
+import User from "../models/User.js";
+import { protect } from "../middleware/authMiddleware.js";
+
 const router = express.Router();
-const jwt = require("jsonwebtoken");
-const crypto = require("crypto");
-const { z } = require("zod");
-const User = require("../models/User");
-const { protect } = require("../middleware/authMiddleware");
 
 // Zod schemas for input validation
 const loginSchema = z.object({
@@ -326,4 +327,4 @@ router.get("/me", protect, async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
