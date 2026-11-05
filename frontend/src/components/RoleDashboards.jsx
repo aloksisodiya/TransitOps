@@ -42,7 +42,7 @@ const Card = ({ title, value, desc, icon: Icon, color = "text-brand" }) => (
         <p className="text-xs text-theme-muted font-sans font-semibold uppercase tracking-wider">
           {title}
         </p>
-        <h4 className="text-2xl font-bold mt-1.5 technical-mono text-white">
+        <h4 className="text-2xl font-bold mt-1.5 font-mono tracking-tight text-white">
           {value}
         </h4>
       </div>
@@ -106,7 +106,7 @@ export const DispatcherDashboard = () => {
 
   if (error) {
     return (
-      <div className="bg-red-950/40 border border-red-500/30 p-6 rounded text-center text-red-400 font-mono">
+      <div className="bg-red-950/40 border border-red-500/30 p-4 sm:p-6 rounded text-center text-red-400 font-mono">
         <AlertTriangle className="w-8 h-8 mx-auto mb-2 text-red-500" />
         <h4 className="font-bold">FEED ERROR</h4>
         <p className="text-xs mt-1">Failed to establish active websocket/data connection to database.</p>
@@ -163,13 +163,13 @@ export const DispatcherDashboard = () => {
             placeholder="Search dispatches..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="ops-input pl-9"
+            className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none pl-9"
           />
         </div>
       </div>
 
       {/* METRIC GRID (7 Cards Side by Side, responsive wrapping) */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-7 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-7 gap-4">
         <div className="bg-theme-panel border border-dark-border p-4 rounded shadow flex flex-col justify-between border-l-2 border-l-blue-500 hover:border-brand/40 transition-colors">
           <div>
             <span className="text-xs text-theme-muted font-sans font-semibold uppercase tracking-wider block">Active Vehicles</span>
@@ -236,7 +236,7 @@ export const DispatcherDashboard = () => {
             <select 
               value={vehicleTypeFilter} 
               onChange={(e) => setVehicleTypeFilter(e.target.value)} 
-              className="ops-input cursor-pointer"
+              className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none cursor-pointer"
             >
               <option value="All">All Types</option>
               <option value="Van">Van</option>
@@ -252,7 +252,7 @@ export const DispatcherDashboard = () => {
             <select 
               value={statusFilter} 
               onChange={(e) => setStatusFilter(e.target.value)} 
-              className="ops-input cursor-pointer"
+              className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none cursor-pointer"
             >
               <option value="All">All Statuses</option>
               <option value="Draft">Draft</option>
@@ -267,7 +267,7 @@ export const DispatcherDashboard = () => {
             <select 
               value={sourceFilter} 
               onChange={(e) => setSourceFilter(e.target.value)} 
-              className="ops-input cursor-pointer"
+              className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none cursor-pointer"
             >
               <option value="All">All Regions</option>
               {uniqueSources.map((source, idx) => (
@@ -327,12 +327,12 @@ export const DispatcherDashboard = () => {
                         </span>
                       </td>
                       <td>
-                        {trip.status === "Completed" && <span className="ops-badge-success">Completed</span>}
-                        {trip.status === "Dispatched" && <span className="ops-badge-warning">Dispatched</span>}
-                        {trip.status === "Draft" && <span className="ops-badge-info bg-gray-500/10 text-gray-400 border-gray-500/20">Draft</span>}
-                        {trip.status === "Cancelled" && <span className="ops-badge-danger">Cancelled</span>}
+                        {trip.status === "Completed" && <span className="rounded-full border border-green-500/20 bg-green-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-green-600 dark:text-green-400">Completed</span>}
+                        {trip.status === "Dispatched" && <span className="rounded-full border border-amber-500/20 bg-amber-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-amber-600 dark:text-amber-400">Dispatched</span>}
+                        {trip.status === "Draft" && <span className="rounded-full border border-blue-500/20 bg-blue-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-blue-600 dark:text-blue-400 bg-gray-500/10 text-gray-400 border-gray-500/20">Draft</span>}
+                        {trip.status === "Cancelled" && <span className="rounded-full border border-red-500/20 bg-red-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-brand">Cancelled</span>}
                       </td>
-                      <td className="text-right technical-mono text-theme-muted font-bold">
+                      <td className="text-right font-mono tracking-tight text-theme-muted font-bold">
                         {trip.status === "Dispatched" ? (
                           <span className="text-blue-400 font-mono">{trip.eta}</span>
                         ) : trip.status === "Draft" ? (
@@ -716,7 +716,7 @@ export const TripsManager = () => {
       L.marker(srcCoords, { icon: startIcon })
         .addTo(tripsLayerGroupRef.current)
         .bindPopup(`Origin: ${t.source}`)
-        .bindTooltip("Start", { permanent: true, direction: "top", className: "ops-tooltip font-mono text-[9px] bg-zinc-900/90 text-green-400 border border-green-500/20 px-1 py-0.5 rounded shadow" });
+        .bindTooltip("Start", { permanent: true, direction: "top", className: "font-mono text-[9px] bg-zinc-900/90 text-green-400 border border-green-500/20 px-1 py-0.5 rounded shadow" });
 
       // End Pin
       const endIcon = L.divIcon({
@@ -727,7 +727,7 @@ export const TripsManager = () => {
       L.marker(destCoords, { icon: endIcon })
         .addTo(tripsLayerGroupRef.current)
         .bindPopup(`Destination: ${t.destination}`)
-        .bindTooltip("End", { permanent: true, direction: "top", className: "ops-tooltip font-mono text-[9px] bg-zinc-900/90 text-red-400 border border-red-500/20 px-1 py-0.5 rounded shadow" });
+        .bindTooltip("End", { permanent: true, direction: "top", className: "font-mono text-[9px] bg-zinc-900/90 text-red-400 border border-red-500/20 px-1 py-0.5 rounded shadow" });
 
       // Render truck markers for active dispatches
       if (t.status === "Dispatched") {
@@ -1060,7 +1060,7 @@ export const TripsManager = () => {
         <div className="lg:col-span-5 space-y-6">
           
           {/* CREATE TRIP FORM */}
-          <div className="bg-theme-panel border border-dark-border p-6 rounded-xl shadow space-y-6">
+          <div className="bg-theme-panel border border-dark-border p-4 sm:p-6 rounded-xl shadow space-y-6">
             
             {/* Lifecycle display */}
             <div className="space-y-2">
@@ -1097,7 +1097,7 @@ export const TripsManager = () => {
                   placeholder="e.g. Gandhinagar Depot"
                   value={source}
                   onChange={(e) => setSource(e.target.value)}
-                  className="ops-input"
+                  className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none"
                 />
               </div>
 
@@ -1108,7 +1108,7 @@ export const TripsManager = () => {
                   placeholder="e.g. Ahmedabad Hub"
                   value={destination}
                   onChange={(e) => setDestination(e.target.value)}
-                  className="ops-input"
+                  className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none"
                 />
               </div>
 
@@ -1117,7 +1117,7 @@ export const TripsManager = () => {
                 <select
                   value={vehicleId}
                   onChange={(e) => setVehicleId(e.target.value)}
-                  className="ops-input cursor-pointer"
+                  className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none cursor-pointer"
                 >
                   <option value="">Select Available Vehicle</option>
                   {availableVehicles.map(v => (
@@ -1133,7 +1133,7 @@ export const TripsManager = () => {
                 <select
                   value={driverId}
                   onChange={(e) => setDriverId(e.target.value)}
-                  className="ops-input cursor-pointer"
+                  className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none cursor-pointer"
                 >
                   <option value="">Select Available Driver</option>
                   {availableDrivers.map(d => (
@@ -1144,7 +1144,7 @@ export const TripsManager = () => {
                 </select>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
                   <label className="block text-[10px] text-theme-muted uppercase font-bold">Cargo Weight (kg)</label>
                   <input
@@ -1152,7 +1152,7 @@ export const TripsManager = () => {
                     placeholder="e.g. 700"
                     value={cargoWeight}
                     onChange={(e) => setCargoWeight(e.target.value)}
-                    className="ops-input"
+                    className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none"
                   />
                 </div>
                 
@@ -1163,7 +1163,7 @@ export const TripsManager = () => {
                     placeholder="e.g. 38"
                     value={distance}
                     onChange={(e) => setDistance(e.target.value)}
-                    className="ops-input"
+                    className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none"
                   />
                 </div>
               </div>
@@ -1189,7 +1189,7 @@ export const TripsManager = () => {
               )}
 
               {/* Buttons */}
-              <div className="grid grid-cols-2 gap-4 pt-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                 <button
                   type="button"
                   disabled={isDispatchBlocked}
@@ -1211,7 +1211,7 @@ export const TripsManager = () => {
           </div>
 
           {/* ROUTE OPTIMIZER WIDGET */}
-          <div className="bg-theme-panel border border-dark-border p-6 rounded-xl shadow space-y-4 font-mono text-xs">
+          <div className="bg-theme-panel border border-dark-border p-4 sm:p-6 rounded-xl shadow space-y-4 font-mono text-xs">
             <div>
               <h3 className="text-sm font-bold uppercase text-white font-mono tracking-wide flex items-center gap-2">
                 🧭 Multi-Stop Route Optimizer
@@ -1223,7 +1223,7 @@ export const TripsManager = () => {
 
             <div className="space-y-2 border-t border-dark-border/40 pt-3">
               <span className="text-[10px] text-theme-muted uppercase font-bold block mb-1">Available Waypoints</span>
-              <div className="grid grid-cols-2 gap-2 text-[10px] font-mono text-gray-300">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[10px] font-mono text-gray-300">
                 {Object.keys(coordsMap).map(stop => (
                   <label key={stop} className="flex items-center gap-2 cursor-pointer bg-dark-bg border border-dark-border/60 hover:border-brand/40 px-2 py-1.5 rounded transition-all">
                     <input 
@@ -1259,7 +1259,7 @@ export const TripsManager = () => {
             </div>
 
             {optimizedRoute && (
-              <div className="bg-brand/5 border border-brand/20 p-3 rounded space-y-2 animate-fade-in text-[10px] leading-relaxed">
+              <div className="bg-brand/5 border border-brand/20 p-3 rounded space-y-2 transition-opacity duration-300 text-[10px] leading-relaxed">
                 <div>
                   <span className="text-brand font-bold uppercase tracking-wider block text-[9px]">Optimal Itinerary Calculated</span>
                   <div className="mt-1 space-y-1">
@@ -1292,7 +1292,7 @@ export const TripsManager = () => {
         <div className="lg:col-span-7 space-y-6">
           
           {/* LEAFLET MAP PANEL */}
-          <div className="bg-theme-panel border border-dark-border p-6 rounded shadow space-y-4">
+          <div className="bg-theme-panel border border-dark-border p-4 sm:p-6 rounded shadow space-y-4">
             <div className="flex items-center justify-between">
               <div>
                 <h3 className="text-sm font-bold uppercase tracking-wider text-white">Live Route Tracker</h3>
@@ -1323,7 +1323,7 @@ export const TripsManager = () => {
 
               {/* TELEMETRY OVERLAY */}
               {isSimulating && telemetry && (
-                <div className="absolute bottom-4 left-4 right-4 glass-panel p-4 rounded-xl z-20 text-[10px] text-gray-300 font-mono shadow-2xl animate-fade-in flex flex-wrap justify-between items-center gap-3">
+                <div className="absolute bottom-4 left-4 right-4 border border-black/5 bg-white/75 backdrop-blur-xl dark:border-white/10 dark:bg-[#141519]/70 p-4 rounded-xl z-20 text-[10px] text-gray-300 font-mono shadow-2xl transition-opacity duration-300 flex flex-wrap justify-between items-center gap-3">
                   <div>
                     <span className="text-brand font-bold uppercase tracking-wider block text-[9px] mb-1 animate-pulse">🛰️ Active GPS Telemetry</span>
                     <span className="block text-white font-semibold">Position: {telemetry.lat}, {telemetry.lng}</span>
@@ -1349,7 +1349,7 @@ export const TripsManager = () => {
           </div>
 
           {/* LIVE BOARD */}
-          <div className="bg-theme-panel border border-dark-border p-6 rounded shadow space-y-6">
+          <div className="bg-theme-panel border border-dark-border p-4 sm:p-6 rounded shadow space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <h3 className="text-sm font-bold font-mono uppercase tracking-wider text-theme-text">Live Board</h3>
@@ -1369,7 +1369,7 @@ export const TripsManager = () => {
                   placeholder="Search board..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="ops-input pl-9 text-xs"
+                  className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none pl-9 text-xs"
                 />
               </div>
             </div>
@@ -1390,10 +1390,10 @@ export const TripsManager = () => {
                         </span>
                       </div>
                       <div className="text-right">
-                        {trip.status === "Completed" && <span className="ops-badge-success">Completed</span>}
-                        {trip.status === "Dispatched" && <span className="ops-badge-warning">Dispatched</span>}
-                        {trip.status === "Draft" && <span className="ops-badge-info bg-gray-500/10 text-gray-400 border-gray-500/20">Draft</span>}
-                        {trip.status === "Cancelled" && <span className="ops-badge-danger">Cancelled</span>}
+                        {trip.status === "Completed" && <span className="rounded-full border border-green-500/20 bg-green-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-green-600 dark:text-green-400">Completed</span>}
+                        {trip.status === "Dispatched" && <span className="rounded-full border border-amber-500/20 bg-amber-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-amber-600 dark:text-amber-400">Dispatched</span>}
+                        {trip.status === "Draft" && <span className="rounded-full border border-blue-500/20 bg-blue-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-blue-600 dark:text-blue-400 bg-gray-500/10 text-gray-400 border-gray-500/20">Draft</span>}
+                        {trip.status === "Cancelled" && <span className="rounded-full border border-red-500/20 bg-red-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-brand">Cancelled</span>}
                         <span className="text-[10px] text-theme-muted block mt-1">
                           {trip.driverId ? trip.driverId.name : "Unassigned Driver"}
                         </span>
@@ -1751,7 +1751,7 @@ export const FleetRegistry = () => {
             )}
 
             <form onSubmit={handleSubmit} className="space-y-3 font-mono text-xs">
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="space-y-1">
                   <label className="block text-[10px] text-theme-muted uppercase font-bold">Registration No.</label>
                   <input
@@ -1760,7 +1760,7 @@ export const FleetRegistry = () => {
                     placeholder="e.g. GJ01AB452"
                     value={regNo}
                     onChange={(e) => setRegNo(e.target.value)}
-                    className="ops-input uppercase"
+                    className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none uppercase"
                   />
                 </div>
                 <div className="space-y-1">
@@ -1771,18 +1771,18 @@ export const FleetRegistry = () => {
                     placeholder="e.g. VAN-05"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="ops-input"
+                    className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="space-y-1">
                   <label className="block text-[10px] text-theme-muted uppercase font-bold">Type</label>
                   <select
                     value={type}
                     onChange={(e) => setType(e.target.value)}
-                    className="ops-input cursor-pointer"
+                    className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none cursor-pointer"
                   >
                     <option value="Van">Van</option>
                     <option value="Truck">Truck</option>
@@ -1799,12 +1799,12 @@ export const FleetRegistry = () => {
                     placeholder="e.g. 500"
                     value={capacity}
                     onChange={(e) => setCapacity(e.target.value)}
-                    className="ops-input"
+                    className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="space-y-1">
                   <label className="block text-[10px] text-theme-muted uppercase font-bold">Odometer (km)</label>
                   <input
@@ -1813,7 +1813,7 @@ export const FleetRegistry = () => {
                     placeholder="e.g. 74000"
                     value={odometer}
                     onChange={(e) => setOdometer(e.target.value)}
-                    className="ops-input"
+                    className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none"
                   />
                 </div>
                 <div className="space-y-1">
@@ -1824,7 +1824,7 @@ export const FleetRegistry = () => {
                     placeholder="e.g. 620000"
                     value={acqCost}
                     onChange={(e) => setAcqCost(e.target.value)}
-                    className="ops-input"
+                    className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none"
                   />
                 </div>
               </div>
@@ -1834,7 +1834,7 @@ export const FleetRegistry = () => {
                 <select
                   value={status}
                   onChange={(e) => setStatus(e.target.value)}
-                  className="ops-input cursor-pointer"
+                  className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none cursor-pointer"
                 >
                   <option value="Available">Available</option>
                   <option value="OnTrip">On Trip</option>
@@ -1892,7 +1892,7 @@ export const FleetRegistry = () => {
           <select
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
-            className="ops-input cursor-pointer text-xs"
+            className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none cursor-pointer text-xs"
           >
             <option value="All">All Types</option>
             <option value="Van">Van</option>
@@ -1908,7 +1908,7 @@ export const FleetRegistry = () => {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="ops-input cursor-pointer text-xs"
+            className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none cursor-pointer text-xs"
           >
             <option value="All">All Statuses</option>
             <option value="Available">Available</option>
@@ -1929,7 +1929,7 @@ export const FleetRegistry = () => {
               placeholder="Search registration..."
               value={searchRegNo}
               onChange={(e) => setSearchRegNo(e.target.value)}
-              className="ops-input pl-9 text-xs"
+              className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none pl-9 text-xs"
             />
           </div>
         </div>
@@ -1972,8 +1972,8 @@ export const FleetRegistry = () => {
                       <td className="font-semibold">{v.name}</td>
                       <td>{v.type}</td>
                       <td>{v.capacityKg} kg</td>
-                      <td className="technical-mono">{Number(v.odometerKm).toLocaleString()} km</td>
-                      <td className="technical-mono">₹{Number(v.acquisitionCost).toLocaleString()}</td>
+                      <td className="font-mono tracking-tight">{Number(v.odometerKm).toLocaleString()} km</td>
+                      <td className="font-mono tracking-tight">₹{Number(v.acquisitionCost).toLocaleString()}</td>
                       <td className="text-center">
                         <button
                           onClick={() => setExpandedVehicleId(expandedVehicleId === v._id ? null : v._id)}
@@ -1984,10 +1984,10 @@ export const FleetRegistry = () => {
                         </button>
                       </td>
                       <td className="text-right">
-                        {v.status === "Available" && <span className="ops-badge-success">Available</span>}
-                        {v.status === "OnTrip" && <span className="ops-badge-warning bg-blue-500/10 text-blue-400 border-blue-500/20">On Trip</span>}
-                        {v.status === "InShop" && <span className="ops-badge-warning">In Shop</span>}
-                        {v.status === "Retired" && <span className="ops-badge-danger">Retired</span>}
+                        {v.status === "Available" && <span className="rounded-full border border-green-500/20 bg-green-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-green-600 dark:text-green-400">Available</span>}
+                        {v.status === "OnTrip" && <span className="rounded-full border border-amber-500/20 bg-amber-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-amber-600 dark:text-amber-400 bg-blue-500/10 text-blue-400 border-blue-500/20">On Trip</span>}
+                        {v.status === "InShop" && <span className="rounded-full border border-amber-500/20 bg-amber-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-amber-600 dark:text-amber-400">In Shop</span>}
+                        {v.status === "Retired" && <span className="rounded-full border border-red-500/20 bg-red-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-brand">Retired</span>}
                       </td>
                     </tr>
                     {/* Document expansion row */}
@@ -2060,14 +2060,14 @@ export const FleetRegistry = () => {
               <button onClick={() => setIsDocModalOpen(false)} className="text-theme-muted hover:text-white font-mono text-sm">✕</button>
             </div>
             <form onSubmit={handleAddDocument} className="space-y-3 font-mono text-xs">
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="space-y-1">
                   <label className="block text-[10px] text-theme-muted uppercase font-bold">Document Name</label>
-                  <input type="text" required placeholder="e.g. Motor Insurance" value={docName} onChange={(e) => setDocName(e.target.value)} className="ops-input" />
+                  <input type="text" required placeholder="e.g. Motor Insurance" value={docName} onChange={(e) => setDocName(e.target.value)} className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none" />
                 </div>
                 <div className="space-y-1">
                   <label className="block text-[10px] text-theme-muted uppercase font-bold">Document Type</label>
-                  <select value={docType} onChange={(e) => setDocType(e.target.value)} className="ops-input cursor-pointer">
+                  <select value={docType} onChange={(e) => setDocType(e.target.value)} className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none cursor-pointer">
                     <option value="Insurance">Insurance</option>
                     <option value="Registration">Registration</option>
                     <option value="Permit">Permit</option>
@@ -2079,21 +2079,21 @@ export const FleetRegistry = () => {
               </div>
               <div className="space-y-1">
                 <label className="block text-[10px] text-theme-muted uppercase font-bold">Document Number</label>
-                <input type="text" placeholder="e.g. POL-2026-1234" value={docNo} onChange={(e) => setDocNo(e.target.value)} className="ops-input" />
+                <input type="text" placeholder="e.g. POL-2026-1234" value={docNo} onChange={(e) => setDocNo(e.target.value)} className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none" />
               </div>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="space-y-1">
                   <label className="block text-[10px] text-theme-muted uppercase font-bold">Issue Date</label>
-                  <input type="date" value={docIssueDate} onChange={(e) => setDocIssueDate(e.target.value)} className="ops-input cursor-pointer" />
+                  <input type="date" value={docIssueDate} onChange={(e) => setDocIssueDate(e.target.value)} className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none cursor-pointer" />
                 </div>
                 <div className="space-y-1">
                   <label className="block text-[10px] text-theme-muted uppercase font-bold">Expiry Date</label>
-                  <input type="date" value={docExpiryDate} onChange={(e) => setDocExpiryDate(e.target.value)} className="ops-input cursor-pointer" />
+                  <input type="date" value={docExpiryDate} onChange={(e) => setDocExpiryDate(e.target.value)} className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none cursor-pointer" />
                 </div>
               </div>
               <div className="space-y-1">
                 <label className="block text-[10px] text-theme-muted uppercase font-bold">Notes</label>
-                <input type="text" placeholder="Optional notes..." value={docNotes} onChange={(e) => setDocNotes(e.target.value)} className="ops-input" />
+                <input type="text" placeholder="Optional notes..." value={docNotes} onChange={(e) => setDocNotes(e.target.value)} className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none" />
               </div>
               <button type="submit" className="w-full bg-brand text-black font-bold uppercase py-2.5 rounded hover:bg-brand-light tracking-wide text-xs mt-4 transition-colors">
                 Save Document
@@ -2217,7 +2217,7 @@ export const MaintenanceLogs = () => {
         <div className="lg:col-span-5 space-y-6">
           
           {/* LOG SERVICE RECORD FORM */}
-          <div className="bg-theme-panel border border-dark-border p-6 rounded-xl shadow space-y-4">
+          <div className="bg-theme-panel border border-dark-border p-4 sm:p-6 rounded-xl shadow space-y-4">
             <h3 className="text-sm font-bold uppercase text-white font-mono tracking-wide">Log Service Record</h3>
             
             <form onSubmit={handleSubmit} className="space-y-4 font-mono text-xs">
@@ -2226,7 +2226,7 @@ export const MaintenanceLogs = () => {
                 <select
                   value={selectedVehicle}
                   onChange={(e) => setSelectedVehicle(e.target.value)}
-                  className="ops-input cursor-pointer"
+                  className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none cursor-pointer"
                   required
                 >
                   <option value="">Select Vehicle</option>
@@ -2243,12 +2243,12 @@ export const MaintenanceLogs = () => {
                   placeholder="e.g. Oil Change / Engine Repair"
                   value={serviceType}
                   onChange={(e) => setServiceType(e.target.value)}
-                  className="ops-input"
+                  className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none"
                   required
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
                   <label className="block text-[10px] text-theme-muted uppercase font-bold">Cost (₹)</label>
                   <input
@@ -2256,7 +2256,7 @@ export const MaintenanceLogs = () => {
                     placeholder="e.g. 2500"
                     value={cost}
                     onChange={(e) => setCost(e.target.value)}
-                    className="ops-input"
+                    className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none"
                     required
                   />
                 </div>
@@ -2267,7 +2267,7 @@ export const MaintenanceLogs = () => {
                     type="date"
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
-                    className="ops-input cursor-pointer"
+                    className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none cursor-pointer"
                   />
                 </div>
               </div>
@@ -2277,7 +2277,7 @@ export const MaintenanceLogs = () => {
                 <select
                   value={status}
                   onChange={(e) => setStatus(e.target.value)}
-                  className="ops-input cursor-pointer"
+                  className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none cursor-pointer"
                 >
                   <option value="Active">Active (In Shop)</option>
                   <option value="Completed">Completed</option>
@@ -2312,7 +2312,7 @@ export const MaintenanceLogs = () => {
 
           {/* PREDICTIVE ALERTS */}
           {predictiveAlerts.length > 0 && (
-            <div className="bg-theme-panel border border-dark-border p-6 rounded-xl shadow space-y-4 font-mono text-xs animate-fade-in">
+            <div className="bg-theme-panel border border-dark-border p-4 sm:p-6 rounded-xl shadow space-y-4 font-mono text-xs transition-opacity duration-300">
               <h3 className="text-sm font-bold uppercase text-white tracking-wide flex items-center gap-2">
                 <AlertTriangle className="w-4 h-4 text-amber-500 animate-pulse" /> Predictive Alerts
               </h3>
@@ -2352,7 +2352,7 @@ export const MaintenanceLogs = () => {
         </div>
 
         {/* SERVICE LOGS TABLE (col-span-7) */}
-        <div className="lg:col-span-7 bg-theme-panel border border-dark-border p-6 rounded shadow space-y-4">
+        <div className="lg:col-span-7 bg-theme-panel border border-dark-border p-4 sm:p-6 rounded shadow space-y-4">
           <h3 className="text-sm font-bold font-mono uppercase tracking-wider text-theme-text">Service Log</h3>
           
           <div className="overflow-x-auto max-h-[420px] overflow-y-auto pr-1">
@@ -2374,12 +2374,12 @@ export const MaintenanceLogs = () => {
                         {log.vehicleId ? log.vehicleId.registrationNo : "—"}
                       </td>
                       <td className="font-semibold">{log.serviceType}</td>
-                      <td className="technical-mono">₹{Number(log.cost).toLocaleString()}</td>
+                      <td className="font-mono tracking-tight">₹{Number(log.cost).toLocaleString()}</td>
                       <td>
                         {log.status === "Completed" ? (
-                          <span className="ops-badge-success">Completed</span>
+                          <span className="rounded-full border border-green-500/20 bg-green-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-green-600 dark:text-green-400">Completed</span>
                         ) : (
-                          <span className="ops-badge-warning">In Shop</span>
+                          <span className="rounded-full border border-amber-500/20 bg-amber-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-amber-600 dark:text-amber-400">In Shop</span>
                         )}
                       </td>
                       <td className="text-right">
@@ -2584,7 +2584,7 @@ export const DriverRegistry = () => {
             )}
 
             <form onSubmit={handleSubmit} className="space-y-3 font-mono text-xs">
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="space-y-1">
                   <label className="block text-[10px] text-theme-muted uppercase font-bold">Driver Name</label>
                   <input
@@ -2593,7 +2593,7 @@ export const DriverRegistry = () => {
                     placeholder="e.g. Alex"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="ops-input"
+                    className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none"
                   />
                 </div>
                 <div className="space-y-1">
@@ -2604,18 +2604,18 @@ export const DriverRegistry = () => {
                     placeholder="e.g. DL-88213"
                     value={licenseNo}
                     onChange={(e) => setLicenseNo(e.target.value)}
-                    className="ops-input uppercase"
+                    className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none uppercase"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="space-y-1">
                   <label className="block text-[10px] text-theme-muted uppercase font-bold">Category</label>
                   <select
                     value={licenseCategory}
                     onChange={(e) => setLicenseCategory(e.target.value)}
-                    className="ops-input cursor-pointer"
+                    className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none cursor-pointer"
                   >
                     <option value="LMV">LMV</option>
                     <option value="HMV">HMV</option>
@@ -2628,12 +2628,12 @@ export const DriverRegistry = () => {
                     required
                     value={licenseExpiry}
                     onChange={(e) => setLicenseExpiry(e.target.value)}
-                    className="ops-input cursor-pointer"
+                    className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none cursor-pointer"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="space-y-1">
                   <label className="block text-[10px] text-theme-muted uppercase font-bold">Contact Info</label>
                   <input
@@ -2642,7 +2642,7 @@ export const DriverRegistry = () => {
                     placeholder="e.g. 98765xxxxx"
                     value={contact}
                     onChange={(e) => setContact(e.target.value)}
-                    className="ops-input"
+                    className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none"
                   />
                 </div>
                 <div className="space-y-1">
@@ -2652,12 +2652,12 @@ export const DriverRegistry = () => {
                     placeholder="e.g. 96"
                     value={tripCompletionPct}
                     onChange={(e) => setTripCompletionPct(e.target.value)}
-                    className="ops-input"
+                    className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="space-y-1">
                   <label className="block text-[10px] text-theme-muted uppercase font-bold">Safety Score (%)</label>
                   <input
@@ -2665,7 +2665,7 @@ export const DriverRegistry = () => {
                     placeholder="e.g. 100"
                     value={safetyScore}
                     onChange={(e) => setSafetyScore(e.target.value)}
-                    className="ops-input"
+                    className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none"
                   />
                 </div>
                 <div className="space-y-1">
@@ -2673,7 +2673,7 @@ export const DriverRegistry = () => {
                   <select
                     value={status}
                     onChange={(e) => setStatus(e.target.value)}
-                    className="ops-input cursor-pointer"
+                    className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none cursor-pointer"
                   >
                     <option value="Available">Available</option>
                     <option value="OnTrip">On Trip</option>
@@ -2758,21 +2758,21 @@ export const DriverRegistry = () => {
                         </span>
                       </td>
                       <td className="text-theme-muted">{d.contact}</td>
-                      <td className="technical-mono">{d.tripCompletionPct || 0}%</td>
+                      <td className="font-mono tracking-tight">{d.tripCompletionPct || 0}%</td>
                       <td>
                         {d.status === "Suspended" ? (
-                          <span className="ops-badge-warning">Suspended</span>
+                          <span className="rounded-full border border-amber-500/20 bg-amber-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-amber-600 dark:text-amber-400">Suspended</span>
                         ) : d.status === "OnTrip" ? (
-                          <span className="ops-badge-warning bg-blue-500/10 text-blue-400 border-blue-500/20">On Trip</span>
+                          <span className="rounded-full border border-amber-500/20 bg-amber-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-amber-600 dark:text-amber-400 bg-blue-500/10 text-blue-400 border-blue-500/20">On Trip</span>
                         ) : (
-                          <span className="ops-badge-success">Available</span>
+                          <span className="rounded-full border border-green-500/20 bg-green-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-green-600 dark:text-green-400">Available</span>
                         )}
                       </td>
                       <td className="text-right">
-                        {d.status === "Available" && <span className="ops-badge-success">Available</span>}
-                        {d.status === "OnTrip" && <span className="ops-badge-warning bg-blue-500/10 text-blue-400 border-blue-500/20">On Trip</span>}
-                        {d.status === "OffDuty" && <span className="ops-badge-info bg-gray-500/10 text-gray-400 border-gray-500/20">Off Duty</span>}
-                        {d.status === "Suspended" && <span className="ops-badge-danger">Suspended</span>}
+                        {d.status === "Available" && <span className="rounded-full border border-green-500/20 bg-green-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-green-600 dark:text-green-400">Available</span>}
+                        {d.status === "OnTrip" && <span className="rounded-full border border-amber-500/20 bg-amber-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-amber-600 dark:text-amber-400 bg-blue-500/10 text-blue-400 border-blue-500/20">On Trip</span>}
+                        {d.status === "OffDuty" && <span className="rounded-full border border-blue-500/20 bg-blue-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-blue-600 dark:text-blue-400 bg-gray-500/10 text-gray-400 border-gray-500/20">Off Duty</span>}
+                        {d.status === "Suspended" && <span className="rounded-full border border-red-500/20 bg-red-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-brand">Suspended</span>}
                       </td>
                     </tr>
                   );
@@ -2791,10 +2791,10 @@ export const DriverRegistry = () => {
       <div className="bg-theme-panel border border-dark-border p-4 rounded shadow space-y-2">
         <span className="text-[10px] text-theme-muted font-mono uppercase font-bold tracking-widest block text-center">Toggle Status Legend</span>
         <div className="flex flex-wrap items-center justify-center gap-3">
-          <span className="ops-badge-success uppercase font-mono text-[9px]">Available</span>
-          <span className="ops-badge-warning bg-blue-500/10 text-blue-400 border-blue-500/20 uppercase font-mono text-[9px]">On Trip</span>
-          <span className="ops-badge-info bg-gray-500/10 text-gray-400 border-gray-500/20 uppercase font-mono text-[9px]">Off Duty</span>
-          <span className="ops-badge-danger uppercase font-mono text-[9px]">Suspended</span>
+          <span className="rounded-full border border-green-500/20 bg-green-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-green-600 dark:text-green-400 uppercase font-mono text-[9px]">Available</span>
+          <span className="rounded-full border border-amber-500/20 bg-amber-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-amber-600 dark:text-amber-400 bg-blue-500/10 text-blue-400 border-blue-500/20 uppercase font-mono text-[9px]">On Trip</span>
+          <span className="rounded-full border border-blue-500/20 bg-blue-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-blue-600 dark:text-blue-400 bg-gray-500/10 text-gray-400 border-gray-500/20 uppercase font-mono text-[9px]">Off Duty</span>
+          <span className="rounded-full border border-red-500/20 bg-red-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-brand uppercase font-mono text-[9px]">Suspended</span>
         </div>
       </div>
 
@@ -2898,7 +2898,7 @@ export const ComplianceLogs = () => {
       </div>
 
       {/* Overview Cards (Responsive Grid) */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-theme-panel border border-dark-border p-4 rounded-xl shadow hover:border-brand/40 transition-colors">
           <span className="text-xs text-theme-muted font-sans font-semibold block uppercase tracking-wider">Compliance Index</span>
           <span className={`text-2xl font-bold block mt-1 font-mono ${totalComplianceScore > 80 ? 'text-green-400' : totalComplianceScore > 50 ? 'text-amber-400' : 'text-red-400'}`}>{totalComplianceScore}%</span>
@@ -2932,7 +2932,7 @@ export const ComplianceLogs = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* DRIVERS CRITICAL COMPLIANCE */}
-        <div className="bg-theme-panel border border-dark-border p-6 rounded-xl shadow space-y-4">
+        <div className="bg-theme-panel border border-dark-border p-4 sm:p-6 rounded-xl shadow space-y-4">
           <h3 className="text-sm font-bold uppercase tracking-wider text-white flex items-center gap-2">
             <ShieldAlert className="w-4 h-4 text-red-500" /> Driver Credentials Verification
           </h3>
@@ -2948,7 +2948,7 @@ export const ComplianceLogs = () => {
                     </span>
                   </div>
                   {isApproved ? (
-                    <span className="ops-badge-success uppercase text-[8px]">Waived</span>
+                    <span className="rounded-full border border-green-500/20 bg-green-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-green-600 dark:text-green-400 uppercase text-[8px]">Waived</span>
                   ) : (
                     <div className="flex gap-2">
                       <button 
@@ -2957,7 +2957,7 @@ export const ComplianceLogs = () => {
                       >
                         Verify Waiver
                       </button>
-                      <span className="ops-badge-danger uppercase text-[8px]">Blocked</span>
+                      <span className="rounded-full border border-red-500/20 bg-red-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-brand uppercase text-[8px]">Blocked</span>
                     </div>
                   )}
                 </div>
@@ -2975,7 +2975,7 @@ export const ComplianceLogs = () => {
                     </span>
                   </div>
                   {isApproved ? (
-                    <span className="ops-badge-success uppercase text-[8px]">Waived</span>
+                    <span className="rounded-full border border-green-500/20 bg-green-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-green-600 dark:text-green-400 uppercase text-[8px]">Waived</span>
                   ) : (
                     <div className="flex gap-2">
                       <button 
@@ -2984,7 +2984,7 @@ export const ComplianceLogs = () => {
                       >
                         Approve
                       </button>
-                      <span className="ops-badge-warning uppercase text-[8px]">Renew</span>
+                      <span className="rounded-full border border-amber-500/20 bg-amber-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-amber-600 dark:text-amber-400 uppercase text-[8px]">Renew</span>
                     </div>
                   )}
                 </div>
@@ -3002,7 +3002,7 @@ export const ComplianceLogs = () => {
                     </span>
                   </div>
                   {isApproved ? (
-                    <span className="ops-badge-success uppercase text-[8px]">Waived</span>
+                    <span className="rounded-full border border-green-500/20 bg-green-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-green-600 dark:text-green-400 uppercase text-[8px]">Waived</span>
                   ) : (
                     <div className="flex gap-2">
                       <button 
@@ -3011,7 +3011,7 @@ export const ComplianceLogs = () => {
                       >
                         Verify Roster
                       </button>
-                      <span className="ops-badge-danger uppercase text-[8px]">Monitor</span>
+                      <span className="rounded-full border border-red-500/20 bg-red-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-brand uppercase text-[8px]">Monitor</span>
                     </div>
                   )}
                 </div>
@@ -3025,7 +3025,7 @@ export const ComplianceLogs = () => {
         </div>
 
         {/* VEHICLE DEPRECIATION & FLEET INTEGRITY */}
-        <div className="bg-theme-panel border border-dark-border p-6 rounded-xl shadow space-y-4">
+        <div className="bg-theme-panel border border-dark-border p-4 sm:p-6 rounded-xl shadow space-y-4">
           <h3 className="text-sm font-bold uppercase tracking-wider text-white flex items-center gap-2">
             <Truck className="w-4 h-4 text-brand" /> Vehicle Depreciation & Cost Warnings
           </h3>
@@ -3042,7 +3042,7 @@ export const ComplianceLogs = () => {
                     </span>
                   </div>
                   {isApproved ? (
-                    <span className="ops-badge-success uppercase text-[8px]">Waived</span>
+                    <span className="rounded-full border border-green-500/20 bg-green-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-green-600 dark:text-green-400 uppercase text-[8px]">Waived</span>
                   ) : (
                     <div className="flex gap-2">
                       <button 
@@ -3051,7 +3051,7 @@ export const ComplianceLogs = () => {
                       >
                         Verify Costs
                       </button>
-                      <span className="ops-badge-danger uppercase text-[8px]">Depreciated</span>
+                      <span className="rounded-full border border-red-500/20 bg-red-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-brand uppercase text-[8px]">Depreciated</span>
                     </div>
                   )}
                 </div>
@@ -3331,7 +3331,7 @@ export const FuelExpenses = () => {
                 <select
                   value={fuelVehicle}
                   onChange={(e) => setFuelVehicle(e.target.value)}
-                  className="ops-input cursor-pointer"
+                  className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none cursor-pointer"
                   required
                 >
                   <option value="">Select Vehicle</option>
@@ -3341,7 +3341,7 @@ export const FuelExpenses = () => {
                 </select>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
                   <label className="block text-[10px] text-theme-muted uppercase font-bold">Liters (L)</label>
                   <input
@@ -3349,7 +3349,7 @@ export const FuelExpenses = () => {
                     placeholder="e.g. 42"
                     value={fuelLiters}
                     onChange={(e) => setFuelLiters(e.target.value)}
-                    className="ops-input"
+                    className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none"
                     required
                   />
                 </div>
@@ -3360,7 +3360,7 @@ export const FuelExpenses = () => {
                     placeholder="e.g. 3150"
                     value={fuelCost}
                     onChange={(e) => setFuelCost(e.target.value)}
-                    className="ops-input"
+                    className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none"
                     required
                   />
                 </div>
@@ -3372,7 +3372,7 @@ export const FuelExpenses = () => {
                   type="date"
                   value={fuelDate}
                   onChange={(e) => setFuelDate(e.target.value)}
-                  className="ops-input cursor-pointer"
+                  className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none cursor-pointer"
                 />
               </div>
 
@@ -3396,13 +3396,13 @@ export const FuelExpenses = () => {
               <button onClick={() => setIsExpenseModalOpen(false)} className="text-theme-muted hover:text-white">✕</button>
             </div>
             <form onSubmit={handleAddExpense} className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
                   <label className="block text-[10px] text-theme-muted uppercase font-bold">Linked Trip</label>
                   <select
                     value={expTrip}
                     onChange={(e) => setExpTrip(e.target.value)}
-                    className="ops-input cursor-pointer"
+                    className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none cursor-pointer"
                   >
                     <option value="">Unlinked / None</option>
                     {(trips || []).map(t => (
@@ -3416,7 +3416,7 @@ export const FuelExpenses = () => {
                   <select
                     value={expVehicle}
                     onChange={(e) => setExpVehicle(e.target.value)}
-                    className="ops-input cursor-pointer"
+                    className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none cursor-pointer"
                     required
                   >
                     <option value="">Select Vehicle</option>
@@ -3427,7 +3427,7 @@ export const FuelExpenses = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div className="space-y-1">
                   <label className="block text-[9px] text-theme-muted uppercase font-bold">Toll cost (₹)</label>
                   <input
@@ -3435,7 +3435,7 @@ export const FuelExpenses = () => {
                     placeholder="e.g. 120"
                     value={expToll}
                     onChange={(e) => setExpToll(e.target.value)}
-                    className="ops-input"
+                    className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none"
                   />
                 </div>
                 <div className="space-y-1">
@@ -3445,7 +3445,7 @@ export const FuelExpenses = () => {
                     placeholder="e.g. 150"
                     value={expOther}
                     onChange={(e) => setExpOther(e.target.value)}
-                    className="ops-input"
+                    className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none"
                   />
                 </div>
                 <div className="space-y-1">
@@ -3455,7 +3455,7 @@ export const FuelExpenses = () => {
                     placeholder="e.g. 18000"
                     value={expMaint}
                     onChange={(e) => setExpMaint(e.target.value)}
-                    className="ops-input"
+                    className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none"
                   />
                 </div>
               </div>
@@ -3594,7 +3594,7 @@ export const FuelExpenses = () => {
       {/* TOTAL COST COUNTER */}
       <div className="bg-brand/10 border border-brand/20 p-4 rounded shadow flex items-center justify-between text-brand text-sm font-bold uppercase">
         <span>Total Operational Cost (Auto) = Fuel + Maint + Tolls</span>
-        <span className="text-xl technical-mono font-bold">
+        <span className="text-xl font-mono tracking-tight font-bold">
           ₹{Number(metrics.totalOperationalCost || 0).toLocaleString()}
         </span>
       </div>
@@ -3709,7 +3709,7 @@ export const AnalyticsDashboard = () => {
       </div>
 
       {/* Grid of stats (Responsive Grid) */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-theme-panel border border-dark-border p-4 rounded shadow hover:border-brand/40 transition-colors">
           <span className="text-xs text-theme-muted font-sans font-semibold block uppercase tracking-wider">Fuel Efficiency</span>
           <span className="text-2xl font-bold block mt-1 font-mono text-white">8.4 km/l</span>
@@ -3743,7 +3743,7 @@ export const AnalyticsDashboard = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         {/* MONTHLY REVENUE (col-span-7) */}
-        <div className="lg:col-span-7 bg-theme-panel border border-dark-border p-6 rounded shadow space-y-4">
+        <div className="lg:col-span-7 bg-theme-panel border border-dark-border p-4 sm:p-6 rounded shadow space-y-4">
           <h3 className="text-sm font-bold uppercase tracking-wider text-white">Monthly Revenue</h3>
           
           <div className="h-56 w-full pt-4">
@@ -3777,7 +3777,7 @@ export const AnalyticsDashboard = () => {
         </div>
 
         {/* TOP COSTLIEST VEHICLES (col-span-5) */}
-        <div className="lg:col-span-5 bg-theme-panel border border-dark-border p-6 rounded shadow space-y-5">
+        <div className="lg:col-span-5 bg-theme-panel border border-dark-border p-4 sm:p-6 rounded shadow space-y-5">
           <h3 className="text-sm font-bold uppercase tracking-wider text-white">Top Costliest Vehicles (Repairs)</h3>
           
           <div className="h-56 w-full pt-4">
@@ -3835,7 +3835,7 @@ export const SystemSettings = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         {/* GENERAL SETTINGS FORM (col-span-5) */}
-        <div className="lg:col-span-5 bg-theme-panel border border-dark-border p-6 rounded shadow space-y-4">
+        <div className="lg:col-span-5 bg-theme-panel border border-dark-border p-4 sm:p-6 rounded shadow space-y-4">
           <h3 className="text-sm font-bold uppercase tracking-wider text-white">General Settings</h3>
           
           <form onSubmit={handleSave} className="space-y-4">
@@ -3845,7 +3845,7 @@ export const SystemSettings = () => {
                 type="text"
                 value={depotName}
                 onChange={(e) => setDepotName(e.target.value)}
-                className="ops-input"
+                className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none"
                 required
               />
             </div>
@@ -3855,7 +3855,7 @@ export const SystemSettings = () => {
               <select
                 value={currency}
                 onChange={(e) => setCurrency(e.target.value)}
-                className="ops-input cursor-pointer"
+                className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none cursor-pointer"
               >
                 <option value="INR">INR (₹)</option>
                 <option value="USD">USD ($)</option>
@@ -3868,7 +3868,7 @@ export const SystemSettings = () => {
               <select
                 value={distanceUnit}
                 onChange={(e) => setDistanceUnit(e.target.value)}
-                className="ops-input cursor-pointer"
+                className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none cursor-pointer"
               >
                 <option value="km">Kilometers (km)</option>
                 <option value="mi">Miles (mi)</option>
@@ -3885,7 +3885,7 @@ export const SystemSettings = () => {
         </div>
 
         {/* RBAC MATRIX (col-span-7) */}
-        <div className="lg:col-span-7 bg-theme-panel border border-dark-border p-6 rounded shadow space-y-4">
+        <div className="lg:col-span-7 bg-theme-panel border border-dark-border p-4 sm:p-6 rounded shadow space-y-4">
           <h3 className="text-sm font-bold uppercase tracking-wider text-white">Role-Based Access (RBAC)</h3>
           
           <div className="overflow-x-auto">

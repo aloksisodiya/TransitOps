@@ -261,10 +261,10 @@ const DashboardLayout = ({ children }) => {
               seconds.
             </p>
             <div className="space-y-2">
-              <button onClick={extendSession} className="ops-btn-primary">
+              <button onClick={extendSession} className="w-full rounded-lg bg-brand px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-red-500/20 transition-all duration-200 hover:bg-brand-dark active:translate-y-px focus:outline-none focus:ring-2 focus:ring-red-500/40 disabled:cursor-not-allowed disabled:opacity-60">
                 Keep Me Logged In
               </button>
-              <button onClick={handleAutoLogout} className="ops-btn-secondary">
+              <button onClick={handleAutoLogout} className="w-full rounded-lg border border-dark-border bg-theme-panel-alt px-4 py-2.5 text-sm font-semibold text-theme-text transition-all duration-200 hover:bg-theme-panel active:translate-y-px focus:outline-none focus:ring-2 focus:ring-dark-border">
                 Log Out Now
               </button>
             </div>
@@ -273,7 +273,7 @@ const DashboardLayout = ({ children }) => {
       )}
 
       {/* TOP BAR */}
-      <header className="sticky top-0 z-[60] h-16 bg-dark-surface/90 backdrop-blur-md border-b border-dark-border px-6 flex items-center justify-between">
+      <header className="sticky top-0 z-[60] h-16 bg-dark-surface/90 backdrop-blur-md border-b border-dark-border px-4 sm:px-6 flex items-center justify-between">
         {/* Left Side: Logo & Mobile Menu Toggle */}
         <div className="flex items-center gap-3">
           <button
@@ -290,7 +290,7 @@ const DashboardLayout = ({ children }) => {
         </div>
 
         {/* Right Side: Account Details & Last Login */}
-        <div className="flex items-center gap-3 md:gap-6 relative">
+        <div className="min-w-0 flex items-center gap-3 md:gap-6 relative">
           
           {/* ALERTS BELL NOTIFICATION BUTTON */}
           <div className="relative">
@@ -309,7 +309,7 @@ const DashboardLayout = ({ children }) => {
 
             {/* ALERTS DROPDOWN */}
             {isAlertsOpen && (
-              <div className="absolute right-0 mt-2 w-80 glass-panel rounded-xl shadow-2xl z-50 p-4 space-y-3 font-mono text-xs text-theme-text max-h-[350px] overflow-y-auto animate-fade-in">
+              <div className="absolute right-0 mt-2 w-80 border border-black/5 bg-white/75 backdrop-blur-xl dark:border-white/10 dark:bg-[#141519]/70 rounded-xl shadow-2xl z-50 p-4 space-y-3 font-mono text-xs text-theme-text max-h-[350px] overflow-y-auto transition-opacity duration-300">
                 <div className="flex items-center justify-between border-b border-dark-border/40 pb-2">
                   <span className="font-bold text-white uppercase text-[10px]">Active Alerts</span>
                   <button onClick={() => setIsAlertsOpen(false)} className="text-theme-muted hover:text-white">✕</button>
@@ -355,7 +355,7 @@ const DashboardLayout = ({ children }) => {
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="text-right">
+            <div className="hidden text-right sm:block">
               <p className="text-xs font-semibold text-white">{user.name}</p>
               <span className="inline-block bg-brand/10 text-brand border border-brand/20 text-[10px] px-2 py-0.5 rounded font-sans font-medium mt-0.5 uppercase">
                 {user.role.replace(/([A-Z])/g, " $1").trim()}
@@ -385,7 +385,7 @@ const DashboardLayout = ({ children }) => {
             onClick={() => setIsMobileMenuOpen(false)}
           />
           {/* Drawer Panel */}
-          <aside className="fixed top-16 left-0 bottom-0 w-64 bg-theme-panel-alt border-r border-dark-border p-5 flex flex-col justify-between z-10 animate-slide-in-left shadow-2xl">
+          <aside className="fixed top-16 left-0 bottom-0 w-64 bg-theme-panel-alt border-r border-dark-border p-5 flex flex-col justify-between z-10 transition-transform duration-300 shadow-2xl">
             <div className="space-y-6">
               <div>
                 <span className="text-xs text-gray-500 font-sans font-bold uppercase tracking-wider pl-3">
@@ -480,7 +480,7 @@ const DashboardLayout = ({ children }) => {
         </aside>
 
         {/* PAGE CONTENT CONTAINER */}
-        <main className="flex-1 bg-dark-bg p-6 overflow-y-auto relative">
+        <main className="min-w-0 flex-1 bg-dark-bg p-4 sm:p-6 overflow-y-auto relative">
           {children}
         </main>
       </div>

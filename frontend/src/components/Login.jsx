@@ -187,7 +187,7 @@ const Login = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Raven.k@transitops.in"
-                  className="ops-input pl-9"
+                  className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none pl-9"
                   disabled={loading}
                 />
               </div>
@@ -207,7 +207,7 @@ const Login = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="ops-input pl-9"
+                  className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none pl-9"
                   disabled={loading}
                 />
               </div>
@@ -225,7 +225,7 @@ const Login = () => {
                 <select
                   value={role}
                   onChange={(e) => setRole(e.target.value)}
-                  className="ops-input pl-9 appearance-none cursor-pointer"
+                  className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none pl-9 appearance-none cursor-pointer"
                   disabled={loading}
                 >
                   <option value="Admin">Admin</option>
@@ -262,7 +262,7 @@ const Login = () => {
             {/* SIGN IN BUTTON */}
             <button
               type="submit"
-              className="ops-btn-primary mt-4 flex items-center justify-center gap-2"
+              className="w-full rounded-lg bg-brand px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-red-500/20 transition-all duration-200 hover:bg-brand-dark active:translate-y-px focus:outline-none focus:ring-2 focus:ring-red-500/40 disabled:cursor-not-allowed disabled:opacity-60 mt-4 flex items-center justify-center gap-2"
               disabled={loading}
             >
               {loading ? (

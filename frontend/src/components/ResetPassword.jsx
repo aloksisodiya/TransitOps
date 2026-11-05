@@ -97,7 +97,7 @@ const ResetPassword = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="ops-input pl-9"
+                    className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none pl-9"
                   />
                 </div>
               </div>
@@ -115,14 +115,14 @@ const ResetPassword = () => {
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="ops-input pl-9"
+                    className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none pl-9"
                   />
                 </div>
               </div>
 
               <button
                 type="submit"
-                className="ops-btn-primary flex items-center justify-center gap-2"
+                className="w-full rounded-lg bg-brand px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-red-500/20 transition-all duration-200 hover:bg-brand-dark active:translate-y-px focus:outline-none focus:ring-2 focus:ring-red-500/40 disabled:cursor-not-allowed disabled:opacity-60 flex items-center justify-center gap-2"
                 disabled={loading}
               >
                 {loading ? "Updating..." : "Reset Password"}
@@ -142,7 +142,7 @@ const ResetPassword = () => {
             </p>
             <Link
               to="/login"
-              className="ops-btn-primary block w-full py-2.5 text-center text-sm font-medium text-white bg-brand rounded hover:bg-brand-dark transition-colors"
+              className="w-full rounded-lg bg-brand px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-red-500/20 transition-all duration-200 hover:bg-brand-dark active:translate-y-px focus:outline-none focus:ring-2 focus:ring-red-500/40 disabled:cursor-not-allowed disabled:opacity-60 block w-full py-2.5 text-center text-sm font-medium text-white bg-brand rounded hover:bg-brand-dark transition-colors"
             >
               Log In Now
             </Link>
