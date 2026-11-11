@@ -97,7 +97,7 @@ export const DispatcherDashboard = () => {
 
   if (isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[400px] text-theme-muted font-mono">
+      <div className="flex flex-col items-center justify-center min-h-100 text-theme-muted font-mono">
         <div className="w-8 h-8 border-2 border-brand border-t-transparent rounded-full animate-spin mb-4"></div>
         <span>CONNECTING DEPOT FEED...</span>
       </div>
@@ -169,7 +169,7 @@ export const DispatcherDashboard = () => {
       </div>
 
       {/* METRIC GRID (7 Cards Side by Side, responsive wrapping) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-7 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-4">
         <div className="bg-theme-panel border border-dark-border p-4 rounded shadow flex flex-col justify-between border-l-2 border-l-blue-500 hover:border-brand/40 transition-colors">
           <div>
             <span className="text-xs text-theme-muted font-sans font-semibold uppercase tracking-wider block">Active Vehicles</span>
@@ -322,14 +322,14 @@ export const DispatcherDashboard = () => {
                       </td>
                       <td className="font-semibold">{trip.driver}</td>
                       <td>
-                        <span className="block text-[11px] font-sans truncate max-w-[200px]" title={`${trip.source} ➔ ${trip.destination}`}>
+                        <span className="block text-[11px] font-sans truncate max-w-50" title={`${trip.source} ➔ ${trip.destination}`}>
                           {trip.source} ➔ {trip.destination}
                         </span>
                       </td>
                       <td>
                         {trip.status === "Completed" && <span className="rounded-full border border-green-500/20 bg-green-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-green-600 dark:text-green-400">Completed</span>}
                         {trip.status === "Dispatched" && <span className="rounded-full border border-amber-500/20 bg-amber-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-amber-600 dark:text-amber-400">Dispatched</span>}
-                        {trip.status === "Draft" && <span className="rounded-full border border-blue-500/20 bg-blue-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-blue-600 dark:text-blue-400 bg-gray-500/10 text-gray-400 border-gray-500/20">Draft</span>}
+                        {trip.status === "Draft" && <span className="rounded-full border border-blue-500/20 bg-blue-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-blue-600 dark:text-blue-400">Draft</span>}
                         {trip.status === "Cancelled" && <span className="rounded-full border border-red-500/20 bg-red-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-brand">Cancelled</span>}
                       </td>
                       <td className="text-right font-mono tracking-tight text-theme-muted font-bold">
@@ -1317,7 +1317,7 @@ export const TripsManager = () => {
             <div className="relative">
               <div 
                 ref={mapRef} 
-                className="h-[400px] w-full bg-dark-bg border border-dark-border rounded-lg overflow-hidden z-10"
+                className="h-100 w-full bg-dark-bg border border-dark-border rounded-lg overflow-hidden z-10"
                 style={{ minHeight: "400px" }}
               ></div>
 
@@ -1369,12 +1369,12 @@ export const TripsManager = () => {
                   placeholder="Search board..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none pl-9 text-xs"
+                  className="w-full rounded-lg border border-dark-border bg-theme-panel px-3 py-2 text-sm text-theme-text shadow-sm transition-colors placeholder:text-theme-muted focus:border-brand focus:outline-none pl-9"
                 />
               </div>
             </div>
 
-            <div className="space-y-4 max-h-[500px] overflow-y-auto pr-1">
+            <div className="space-y-4 max-h-125 overflow-y-auto pr-1">
               {filteredTrips.length > 0 ? (
                 filteredTrips.map(trip => (
                   <div 
@@ -1392,7 +1392,7 @@ export const TripsManager = () => {
                       <div className="text-right">
                         {trip.status === "Completed" && <span className="rounded-full border border-green-500/20 bg-green-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-green-600 dark:text-green-400">Completed</span>}
                         {trip.status === "Dispatched" && <span className="rounded-full border border-amber-500/20 bg-amber-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-amber-600 dark:text-amber-400">Dispatched</span>}
-                        {trip.status === "Draft" && <span className="rounded-full border border-blue-500/20 bg-blue-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-blue-600 dark:text-blue-400 bg-gray-500/10 text-gray-400 border-gray-500/20">Draft</span>}
+                        {trip.status === "Draft" && <span className="rounded-full border border-blue-500/20 bg-blue-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-blue-600 dark:text-blue-400 text-gray-400">Draft</span>}
                         {trip.status === "Cancelled" && <span className="rounded-full border border-red-500/20 bg-red-500/10 px-2.5 py-0.5 font-mono text-xs font-medium text-brand">Cancelled</span>}
                         <span className="text-[10px] text-theme-muted block mt-1">
                           {trip.driverId ? trip.driverId.name : "Unassigned Driver"}
